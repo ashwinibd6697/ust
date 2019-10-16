@@ -1,0 +1,213 @@
+ show databases;
+create database d;
+use d;
+show tables;
+create table pdct(pid int,pname varchar(120),quantity int);
+ drop database ust;
+drop table pdct;
+alter table pdct add column price int;
+alter table pdct change column price cost int;
+alter table pdct drop column cost;
+rename table pdct to product;
+insert into product(pid,pname) values(4,"scale");
+ insert into product values(1,"pen",2);
+insert into product values(5,"abc",6),(6,"asfdf",7);
+select * from product;
+ delete from product;
+update product set quantity=100;
+select pname from product;
+
+========================DISTINCT==============================================
+select distinct designation,deptno from employee;
+select distinct deptno from employee;
+
+==================ALIAS=========================================================
+
+select bloodgroup as bldgrp from employee;
+
+==================UPDATE=========================================================== 
+
+ update employee set deptno=50 where eid=9; 
+
+=============================DELETE==================================
+delete from employee where eid=10;
+============================ARITHMATIC OPRTR=====================================
+
+ 1. writa a query to display salary of the employee incremented by 5000
+
+    select salary+5000 as slr from employee;
+    select salary-5000 slr from employee;
+    select salary*12 slr from employee; for annual 
+    select salary/30 slr from employee; per day
+
+===================================relational operator========================================
+
+2. writa a q to display the results from employee table whose designation is developer
+    select * from employee where designation = "developer";
+
+3. waq to display all the records whose excluding work in dpno 20
+    select *  from employee where deptno != 20;
+
+4. waq to display the reult whose salary is grsterthan 15000
+    select *  from employee where salary >15000;
+
+5.  waq to display the reult whose age is lessthan 30
+    select *  from employee where age <30;
+
+6. waq to display name salary emailid mobile no whose age is = or >18
+    select name,salary,email,mobileno from employee where age >= 18;
+
+7. whose salary is <= 40000
+    select *  from employee where salary <=40000;
+
+=============================AND===========================================
+
+8. writa a query to display all employee details whose working deotno 20 as well as salary >35000
+   select * from employee where deptno=20 and salary>35000;
+
+9. waq to deisplay name,salary from employee whose workiimg in deptno 10 and 20
+    select name,salary from employee where deptno=20 and deptno=10;
+
+10. waq to display emp table job designation tester and age wqual to 25
+    select * from employee where designation='hr' and age=25;
+
+=======================================OR===============================
+
+11. waq to display all the record of employee whose working as a tester or salary more than 40000
+     select * from employee where designation='tester' or salary>40000;
+
+12. waq to display name salary age from emp table whose working dept no 10 or 40 or 50
+     select name,salary,age from employee where deptno=10 or deptno=40 or deptno=50;
+
+13. waq to display whose age more than 21 and blood gropup a+
+   select * from employee where  age>=21 and bloodgroup="a+";
+
+=============================NOT===================================
+
+14. waq to dispaly all the records of emp excluding employee
+    select * from employee where not designation='tester'; 
+   or   
+     select * from employee where designation!='tester';
+
+15. waq to display name odf all thne employees whose working as hr or tester and salary >40000
+    select name from employee where (designation='hr' or designation='tester') and salary >40000;
+
+16. waq to display all the employee excluding developer who are workimg in dept 40
+   select * from employee where not (designation="developer" and deptno=40);
+
+17. waq to display developer who are working for dept no 10, or 40,
+     select * from employee where designation="developer" and (deptno=10 or deptno=40);
+
+
+=================================IN===================================
+
+18. waq to display all the employees who are all working in deptno 10,20,40,70,80
+    select * from employee where deptno in(10,20,70,80,40);
+
+19. waq to display name of all the employee who working as he,tester,tech support
+    select name from employee where designation in("hr","tester","tech spport");
+
+20. waq to display the details of tester admin developer who are working in dept no 20 or 30 and salary>40000
+    select * from employee where (designation in("tester","admin","developer")) and (deptno in(20,30)) and salary>40000;
+
+21.waq to deplay excluding who are all working in tester hr
+    select * from employee where designation not in ("tester","hr");
+
+22. waq to desplay all the records of employee whose age is 20,25,25,40 exclude all the details tesster and devcloper
+    select * from employee where age in(20,30,25,21) and (designation not in("tester","developer"));
+
+=============================BETWEEN===================================
+
+23. waq tom display all the employees details dept no between 30 and 50
+    select * from employee where deptno between 30 and 50;
+
+24. waq to display all the employyes details age betewen 20 and 30
+    select * from employee where age between 20 and 30;
+
+25. waq to display all the details of employee who hired during 2017
+     select * from employee where doj between '2017-01-01' and '2017-12-31';
+
+26. waq to display all the detail of employee whose excluding salary range from 25000 and 35000
+    select * from employee where salary not between 25000 and 35000;
+  ========================================IS====================================================
+
+             select * from employee where email is null;
+
+ ========================================LIKE===================================================
+27. waq to  display whose name start with a
+    select * from employee where name like "a%";
+
+28. waq to dispaly name of the display whose 2nd caharacter is i
+    select * from employee where name like "_i%";
+
+29. waq to display name of the employee which as 2 i in their name
+     select * from employee where name like "%i%i%";
+
+30. waq to display whose name start with  A AND END WITH i
+    select * from employee where name like "a%i";
+
+31. waq to display deastils of employee whose name begins with a,p,k
+    select * from employee where name like 'a%' or name like 'p%';
+
+32. waq to display name,salary who is working in dept no 20,30,10 and job designation start with d
+   select name,salary from employee where (deptno in(10,20,30)) and designation like "d%";
+
+
+====================================FUNCTION============================================================
+     ..................Aggregate function.............................
+     select avg(salary) from employee;
+     select min(salary) from employee;
+     select max(salary) from employee;
+     select sum(salary) from employee;
+     select count(*) from employee;
+
+
+======================================ORDEREBY CLAUSE========================================================
+   
+33. waq all the details of employee arranged in descending order based on salary
+     select * from employee order by salary;
+   
+      select * from employee orderby salary desc;   //to sort descending order
+
+============================================================================================================
+34. waq to dispaly all therecord of employee whose data of joing same as pooja
+     select * from employee where doj=(select doj from employee where name="pooja");
+
+35. waq to display 2nd maximum salary
+    select max(salary) from employee where salary<(select max(salary) from employee);
+
+36. waq to display name of the employee whose working in a location which has atleast 1 a in that location
+      select name from employee where deptno in(select dno from dept where location like'%a%');
+      select name from employee where deptno =(select dno from dept where location like'%i%');
+ 
+37. waq to display who is working hr,developer,tester
+     select * from employee where designation in("hr","developer","tester");
+
+=================================groupby==============================================================
+
+38. waq to display the max salary for each department
+     select max(salary),deptno from employee group by deptno;
+
+39. waq to display highest salary given to hr in each department
+    select max(salary),designation,deptno from employee where designation="hr" group by deptno;
+
+=============================having====================================================================
+
+40. waq to display deptno which has atleast 2 employee
+     select deptno from employee  group by deptno having count(*)>=2;
+
+=================================cross join=================================================
+              syntax :select * from t1 cross join t2
+                  for oracle = select * from t1,t2
+           select * from employee cross join dept
+
+====================================INNER JOIN================================================
+
+select * from employee e inner join dept d on  e.deptno=d.dno
+
+==================================LEFT OUTER JOIN============================================
+
+                 select * from employee e left outer join dept d on  e.deptno=d.dno
+                   select * from employee e right outer join dept d on  e.deptno=d.dno
+
+                   select * from employee e full outer join dept d on  e.deptno=d.dno
